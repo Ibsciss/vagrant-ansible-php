@@ -1,21 +1,26 @@
 vagrant-ansible-php
 ===================
 
-An ansible provisioning to set-up a PHP development environment in Vagrant. Perfect for Symfony2, Silex, Laravel, etc. projects.
+An ansible provisioning to set-up a PHP development environment in Vagrant. Tuned for modern php applications (Symfony2, Silex, Laravel, etc.)
 
-Used by [Ibsciss](www.ibsciss.com) for our php developments.
+We ([Ibsciss](www.ibsciss.com)) use it for our php developments.
 
 ## What's inside ?
 
-An Ubuntu precise64 vagrant box, with PHP5.5 & Ngninx ansible provisioning.
+Build on top of the default precise64 vagrant box, PHP5.5 & Ngninx ansible provisioning added.
 
-You'ill get all php stuff, plus :
+Plus :
 
 * Composer
 * Php cli
 * Php sqlite
 
 No Mysql (for the moment)
+
+## Requirements
+
+* You need to have Ansible & Vagrant installed on your computer before you start.
+* A NFS shared folder is used, so you need the `nfs-kernel-server` package on the host to use it : `apt-get install nfs-kernel-server`
 
 ## Recommended workflow
 
@@ -26,7 +31,7 @@ No Mysql (for the moment)
 
 ## Tips
 
-### Cache & Log in-memory
+### in-memory cache & log
 
 One of the biggest issue with wagrant is dealing with large amount of I/O on the shared disk.
 A solution is to put non-src repository which generate a lot of I/O, especially log & cache mecanism, in memory. On debian/ubuntu you have a `/dev/shm` which is a disk mounted in memory.
