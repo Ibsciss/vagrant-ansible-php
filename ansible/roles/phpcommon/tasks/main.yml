@@ -1,6 +1,7 @@
 - name: Install PHP Packages
   sudo: yes
   apt: pkg={{ item }} state=latest
+<<<<<<< HEAD
   with_items: php_packages
 
 - name: copy php modules specific configuration
@@ -30,3 +31,6 @@
   notify:
     - restart nginx
     - restart php5-fpm
+=======
+  with_items: php_packages
+>>>>>>> ef2c217e5732c2ef4edb265136acca37f13bef62
