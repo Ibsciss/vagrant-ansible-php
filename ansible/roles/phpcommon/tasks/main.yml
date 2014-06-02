@@ -2,3 +2,31 @@
   sudo: yes
   apt: pkg={{ item }} state=latest
   with_items: php_packages
+
+- name: copy php modules specific configuration
+  copy: src=etc/php5/mods-available/{{ item.name }} dest=/etc/php5/mods-available/{{ item.name }}
+  with_items:
+    - { name: global.ini }
+    - { name: soap.ini }
+    - { name: intl.ini }
+    - { name: curl.ini }
+    - { name: pdo.ini }
+    - { name: mysql.ini }
+    - { name: sqlite3.ini }
+
+- name: copy cli specific configuration
+  copy: src=etc/php5/cli/conf.d/global_cli.ini dest=/etc/php5/cli/conf.d/global_cli.ini
+
+- name: enable php modules
+  command: php5enmod {{ item.name }}
+  with_items:
+    - { name: global }
+    - { name: intl }
+    - { name: curl }
+    - { name: pdo }
+    - { name: mysql }
+    - { name: soap }
+    - { name: sqlite3 }
+  notify:
+    - restart nginx
+    - restart php5-fpm

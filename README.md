@@ -14,8 +14,8 @@ Plus :
 * Composer
 * Php cli
 * Php sqlite
-
-No Mysql (for the moment)
+* Mysql (default db, user & password : ibsciss)
+* Wkhtmltopdf
 
 ## Requirements
 
@@ -28,6 +28,21 @@ No Mysql (for the moment)
 2. Clone this repository inside a "provisioning" sub-directory: `$ git clone https://github.com/Ibsciss/vagrant-ansible-php my-project/provisioning`.
 3. Clone your php project inside a "code" sub-directory: `$ git clone https://github.com/organization/my-project my-project/code`.
 4. Go to the `provisioning` folder and run `vagrant up`: `$ cd my-project/provisioning` && `$ vagrant up`.
+
+## Symfony installation
+
+**Note : Symfony < 2.3 installation** you have to copy the `app/config/parameters.yml.dist` to `app/config/parameters.yml`.
+
+1. After setup, login in the vagrant VM : `vagrant ssh`
+2. Change current user to _www-data_ : `sudo -s -u www-data`
+3. Go to the app directory : `cd /var/www`
+4. Install composer dependencies : `composer install`
+5. If needed, dump assets : `app/console assetic:dump`
+6. Install database stuffs
+    - install database schema : `app/console doctrine:schema:create`
+    - (optionnal) install fixtures : `app/console doctrine:fixtures:load`
+7. Remove previous caches : `app/console cache:clear --env=prod && app/console cache:clear`
+7. Open your browser, go to `http://ibsciss.devel` and Tada ! Your app is up and running.
 
 ## Tips
 

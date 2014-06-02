@@ -1,0 +1,6 @@
+---
+# This role will install wkhtmltopdf (for debian) http://wkhtmltopdf.org
+
+- name: Install libXrender
+  apt: name=wkhtmltopdf state=present
+  tags: wkhtmltox
