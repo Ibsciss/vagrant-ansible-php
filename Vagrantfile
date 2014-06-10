@@ -16,7 +16,7 @@ Vagrant.configure("2") do |config|
     config.vm.provision "ansible" do |ansible|
         ansible.playbook = "ansible/playbook.yml"
         ansible.extra_vars = {
-            hostname: "config.vm.hostname"
+            hostname: config.vm.hostname
         }
     end
 
